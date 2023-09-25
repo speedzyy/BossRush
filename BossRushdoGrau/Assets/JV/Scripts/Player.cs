@@ -7,11 +7,16 @@ public class Player : MonoBehaviour
 {
     public float speed;
     public float jumpForce;
+    private float movement;
+
+    public GameObject bow;
+    public Transform firePoint;
 
     private Rigidbody2D rig;
     private Animator anim;
     
     private bool isJumping;
+    private bool isFire;
 
     // Start is called before the first frame update
     void Start()
@@ -23,13 +28,18 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Move();
         Jump();
+        BowFire();
+    }
+
+    void FixedUpdate()
+    {
+        Move();
     }
 
     void Move()
     {
-        float movement = Input.GetAxis("Horizontal");
+        movement = Input.GetAxis("Horizontal");
         rig.velocity = new Vector2(movement * speed, rig.velocity.y);
 
         if (movement > 0)
@@ -51,7 +61,7 @@ public class Player : MonoBehaviour
             transform.eulerAngles = new Vector3(0, 180, 0);
         }
 
-        if (movement == 0 && !isJumping)
+        if (movement == 0 && !isJumping && !isFire)
         {
             anim.SetInteger("transition", 0);
         }
@@ -67,6 +77,34 @@ public class Player : MonoBehaviour
                 rig.AddForce(new Vector2(0, jumpForce), ForceMode2D.Impulse);
                 isJumping = true;
             }
+        }
+    }
+    
+    void BowFire()
+    {
+        StartCoroutine("Fire");
+    }
+
+    IEnumerator Fire()
+    {
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            isFire = true;
+            anim.SetInteger("transition", 3);
+            GameObject Bow = Instantiate(bow, firePoint.position, firePoint.rotation);
+
+            if (transform.rotation.y == 0)
+            {
+                Bow.GetComponent<Bow>().isRight = true;
+            }
+            
+            if (transform.rotation.y == 180)
+            {
+                Bow.GetComponent<Bow>().isRight = false;
+            }
+            
+            yield return new WaitForSeconds(0.8f);
+            anim.SetInteger("transition", 0);
         }
     }
 
