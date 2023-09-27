@@ -10,14 +10,20 @@ public class Player : MonoBehaviour
     public float speed;
     public float jumpForce;
     private float movement;
+    public float dashForce;
 
     public GameObject bow;
     public Transform firePoint;
 
     private Rigidbody2D rig;
     private Animator anim;
-    
+
+    public bool powerUpPuloDuplo;
+    public bool powerUpDash;
+
+    private bool isDash;
     private bool isJumping;
+    private bool isDoubleJump;
     private bool isFire;
 
     // Start is called before the first frame update
@@ -34,6 +40,10 @@ public class Player : MonoBehaviour
     {
         Jump();
         BowFire();
+        if (Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            Dash();
+        }
     }
 
     void FixedUpdate()
@@ -44,11 +54,14 @@ public class Player : MonoBehaviour
     void Move()
     {
         movement = Input.GetAxis("Horizontal");
-        rig.velocity = new Vector2(movement * speed, rig.velocity.y);
+        if (!isDash)
+        {
+            rig.velocity = new Vector2(movement * speed, rig.velocity.y);
+        }
 
         if (movement > 0)
         {
-            if (!isJumping)
+            if (!isJumping && !isDash)
             {
                 anim.SetInteger("transition", 1);
             }
@@ -57,7 +70,7 @@ public class Player : MonoBehaviour
         }
         if (movement < 0)
         {
-            if (!isJumping)
+            if (!isJumping && !isDash)
             {
                 anim.SetInteger("transition", 1);
             }
@@ -65,7 +78,7 @@ public class Player : MonoBehaviour
             transform.eulerAngles = new Vector3(0, 180, 0);
         }
 
-        if (movement == 0 && !isJumping && !isFire)
+        if (movement == 0 && !isJumping && !isFire && !isDash)
         {
             anim.SetInteger("transition", 0);
         }
@@ -78,9 +91,26 @@ public class Player : MonoBehaviour
             if (!isJumping)
             {
                 anim.SetInteger("transition", 2);
-                rig.AddForce(new Vector2(0, jumpForce), ForceMode2D.Impulse);
+                rig.velocity = new Vector2(rig.velocity.x, jumpForce);
                 isJumping = true;
             }
+            else
+            {
+                if (!isDoubleJump)
+                {
+                    PuloDuplo();
+                }
+            }
+        }
+    }
+
+    void PuloDuplo()
+    {
+        if (powerUpPuloDuplo)
+        {
+            anim.SetInteger("transition", 2);
+            rig.velocity = new Vector2(rig.velocity.x, jumpForce);
+            isDoubleJump = true;
         }
     }
     
@@ -100,6 +130,29 @@ public class Player : MonoBehaviour
             anim.SetInteger("transition", 0);
             isFire = false;
         }
+    }
+
+    void Dash()
+    {
+        if (powerUpDash)
+        {
+            if (!isDash)
+            {
+                StartCoroutine(ExecucaoDash());
+            }
+        }
+    }
+
+    IEnumerator ExecucaoDash()
+    {
+        isDash = true;
+        float DirecaoDoDash = rig.velocity.x + dashForce * movement;
+        rig.velocity = new Vector2(DirecaoDoDash, rig.velocity.y);
+        anim.SetInteger("transition", 4);
+
+        yield return new WaitForSeconds(0.5f);
+        anim.SetInteger("transition", 0);
+        isDash = false;
     }
 
     public void Atirar()
@@ -134,6 +187,7 @@ public class Player : MonoBehaviour
         if (coll.gameObject.layer == 8)
         {
             isJumping = false;
+            isDoubleJump = false;
         }
     }
 }
