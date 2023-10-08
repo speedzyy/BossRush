@@ -47,7 +47,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 24
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -102,7 +102,238 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: demon-attack_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 8
+        width: 240
+        height: 171
+      alignment: 9
+      pivot: {x: 0.68, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 661edd90fd005f64f88107fc562f1339
+      internalID: 1816808431
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: demon-attack_1
+      rect:
+        serializedVersion: 2
+        x: 240
+        y: 8
+        width: 240
+        height: 171
+      alignment: 9
+      pivot: {x: 0.68, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 86f990936c584f54c84dd14596251d6d
+      internalID: -1595368677
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: demon-attack_2
+      rect:
+        serializedVersion: 2
+        x: 480
+        y: 8
+        width: 240
+        height: 171
+      alignment: 9
+      pivot: {x: 0.68, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9d6e887d73f36e44b8f9580a0ea13d52
+      internalID: 184792301
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: demon-attack_3
+      rect:
+        serializedVersion: 2
+        x: 720
+        y: 8
+        width: 240
+        height: 171
+      alignment: 9
+      pivot: {x: 0.68, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 63fd938780cc7cc45b6ba58cc462e56a
+      internalID: -1700347965
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: demon-attack_4
+      rect:
+        serializedVersion: 2
+        x: 960
+        y: 8
+        width: 240
+        height: 171
+      alignment: 9
+      pivot: {x: 0.68, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7ddc76165a414a6478f0a2ee5a764b9f
+      internalID: 36672536
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: demon-attack_5
+      rect:
+        serializedVersion: 2
+        x: 1200
+        y: 8
+        width: 240
+        height: 171
+      alignment: 9
+      pivot: {x: 0.68, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 174fb252ae27ff7439e2c5aebb7659a0
+      internalID: 1688101667
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: demon-attack_6
+      rect:
+        serializedVersion: 2
+        x: 1440
+        y: 8
+        width: 240
+        height: 171
+      alignment: 9
+      pivot: {x: 0.68, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1340119da01f6764a860d3feff7fcbed
+      internalID: 1752279282
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: demon-attack_7
+      rect:
+        serializedVersion: 2
+        x: 1680
+        y: 8
+        width: 240
+        height: 171
+      alignment: 9
+      pivot: {x: 0.68, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a9d0af3689f662b4a85e62287fcf3951
+      internalID: 1160408671
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: demon-attack_8
+      rect:
+        serializedVersion: 2
+        x: 1920
+        y: 8
+        width: 240
+        height: 171
+      alignment: 9
+      pivot: {x: 0.68, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 54b14399b06cf4a44b666dcd5bc632d2
+      internalID: 1220857867
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: demon-attack_9
+      rect:
+        serializedVersion: 2
+        x: 2160
+        y: 8
+        width: 240
+        height: 171
+      alignment: 9
+      pivot: {x: 0.68, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4b6a047f20100a14f802bcdc4f613832
+      internalID: -798352743
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: demon-attack_10
+      rect:
+        serializedVersion: 2
+        x: 2400
+        y: 8
+        width: 240
+        height: 171
+      alignment: 9
+      pivot: {x: 0.68, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 09a8dad877fcced4589fa6824d583495
+      internalID: 1573453106
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -113,7 +344,18 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      demon-attack_7: 1160408671
+      demon-attack_2: 184792301
+      demon-attack_4: 36672536
+      demon-attack_10: 1573453106
+      demon-attack_1: -1595368677
+      demon-attack_6: 1752279282
+      demon-attack_0: 1816808431
+      demon-attack_3: -1700347965
+      demon-attack_9: -798352743
+      demon-attack_5: 1688101667
+      demon-attack_8: 1220857867
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
