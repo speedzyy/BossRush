@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class Player : MonoBehaviour
 {
@@ -26,12 +27,18 @@ public class Player : MonoBehaviour
     private bool isDoubleJump;
     private bool isFire;
 
+    public AudioClip clip;
+    public AudioClip clip2;
+
+    private AudioSource source;
+
     // Start is called before the first frame update
     void Start()
     {
         rig = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
-        
+        TryGetComponent(out source);
+
         GameController.instance.UpdateLives(health);
     }
 
@@ -83,6 +90,20 @@ public class Player : MonoBehaviour
             anim.SetInteger("transition", 0);
         }
     }
+
+    void Salto()
+    {
+        source.volume = 0.400f;
+        source.pitch = 1;
+        source.PlayOneShot(clip2);
+    }
+
+    void Passo()
+    {
+        source.volume = 0.800f;
+        source.pitch = Random.Range(0.5f, 1.5f);
+        source.PlayOneShot(clip);
+    }
     
     void Jump()
     {
@@ -93,6 +114,7 @@ public class Player : MonoBehaviour
                 anim.SetInteger("transition", 2);
                 rig.velocity = new Vector2(rig.velocity.x, jumpForce);
                 isJumping = true;
+                Salto();
             }
             else
             {
@@ -111,6 +133,7 @@ public class Player : MonoBehaviour
             anim.SetInteger("transition", 2);
             rig.velocity = new Vector2(rig.velocity.x, jumpForce);
             isDoubleJump = true;
+            Salto();
         }
     }
     
