@@ -6,7 +6,7 @@ using Random = UnityEngine.Random;
 
 public class Player : MonoBehaviour
 {
-    public int health = 8;
+    public int health = 20;
     
     public float speed;
     public float jumpForce;
@@ -29,6 +29,7 @@ public class Player : MonoBehaviour
 
     public AudioClip clip;
     public AudioClip clip2;
+    public AudioClip clip3;
 
     private AudioSource source;
 
@@ -40,6 +41,10 @@ public class Player : MonoBehaviour
         TryGetComponent(out source);
 
         GameController.instance.UpdateLives(health);
+        
+        source.volume = 0.400f;
+        source.pitch = 1;
+        source.PlayOneShot(clip3);
     }
 
     // Update is called once per frame
@@ -201,7 +206,7 @@ public class Player : MonoBehaviour
 
         if (health <= 0)
         {
-            
+            anim.SetInteger("transition", 5);
         }
     }
 
@@ -211,6 +216,11 @@ public class Player : MonoBehaviour
         {
             isJumping = false;
             isDoubleJump = false;
+        }
+
+        if (coll.gameObject.layer == 6)
+        {
+            Damage(2);
         }
     }
 }
