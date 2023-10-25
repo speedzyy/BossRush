@@ -1,34 +1,38 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 public class BossHealth : MonoBehaviour
 {
+    public int maxHealth = 100; 
+    int vidaAtual; 
 
-    int vidaAtual;
-    int vidaMaxima;
-
-    void Update()
+    void Start()
     {
-        
+        vidaAtual = maxHealth;
     }
 
-    void Damage(int dano)
+    public void TakeDamage(int damage)
     {
-        vidaAtual -= dano;
+        vidaAtual -= damage; 
 
+        
         if (vidaAtual <= 0)
         {
-            Morre();
+            Die();
+            SceneManager.LoadScene(2);
+            
         }
-
-
     }
 
-    private void Morre()
+    void Die()
     {
-       Destroy(gameObject);
+        Destroy(gameObject); 
+    }
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.CompareTag("Flecha"))
+        {
+            TakeDamage(100);
+        }
     }
 }
 

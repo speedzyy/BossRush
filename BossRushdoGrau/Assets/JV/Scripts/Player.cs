@@ -8,7 +8,7 @@ using Random = UnityEngine.Random;
 public class Player : MonoBehaviour
 {
     public int health = 20;
-    
+
     public float speed;
     public float jumpForce;
     private float movement;
@@ -42,7 +42,7 @@ public class Player : MonoBehaviour
         TryGetComponent(out source);
 
         GameController.instance.UpdateLives(health);
-        
+
         source.volume = 0.400f;
         source.pitch = 1;
         source.PlayOneShot(clip3);
@@ -78,7 +78,7 @@ public class Player : MonoBehaviour
             {
                 anim.SetInteger("transition", 1);
             }
-            
+
             transform.eulerAngles = new Vector3(0, 0, 0);
         }
         if (movement < 0)
@@ -87,7 +87,7 @@ public class Player : MonoBehaviour
             {
                 anim.SetInteger("transition", 1);
             }
-            
+
             transform.eulerAngles = new Vector3(0, 180, 0);
         }
 
@@ -110,7 +110,7 @@ public class Player : MonoBehaviour
         source.pitch = Random.Range(0.5f, 1.5f);
         source.PlayOneShot(clip);
     }
-    
+
     void Jump()
     {
         if (Input.GetButtonDown("Jump"))
@@ -142,7 +142,7 @@ public class Player : MonoBehaviour
             Salto();
         }
     }
-    
+
     void BowFire()
     {
         StartCoroutine("Fire");
@@ -154,7 +154,7 @@ public class Player : MonoBehaviour
         {
             isFire = true;
             anim.SetInteger("transition", 3);
-            
+
             yield return new WaitForSeconds(0.4f);
             anim.SetInteger("transition", 0);
             isFire = false;
@@ -192,14 +192,14 @@ public class Player : MonoBehaviour
         {
             Bow.GetComponent<Bow>().isRight = true;
         }
-            
+
         if (transform.rotation.y == 180)
         {
             Bow.GetComponent<Bow>().isRight = false;
         }
 
     }
-    
+
     public void Damage(int dmg)
     {
         health -= dmg;
@@ -218,10 +218,11 @@ public class Player : MonoBehaviour
             isJumping = false;
             isDoubleJump = false;
         }
-
-        if (coll.gameObject.layer == 6)
+        if (coll.gameObject.CompareTag("Boss"))
         {
             Damage(2);
         }
+
     }
+
 }
