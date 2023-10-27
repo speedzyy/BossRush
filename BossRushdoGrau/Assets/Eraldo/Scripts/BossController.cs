@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class BossController : MonoBehaviour
 {
@@ -9,8 +10,15 @@ public class BossController : MonoBehaviour
     [SerializeField, Min(0)] float raycastDistance;
     [SerializeField] LayerMask raycastLayer;
     [SerializeField] float jumpingInterval;
+    [SerializeField] Animator anim;
     float jumpingIntervalAtual;
-
+    public float tempoParaProximoTiro;
+    [SerializeField] GameObject bolaDeFogo;
+    [SerializeField] Transform spawnDaBola;
+    [SerializeField] BossHealth bossHealth;
+    [SerializeField] Transform player;
+    bool segundoEstagio;
+    public bool podeAtirar = true;
     private void Awake()
     {
         jumpingIntervalAtual = jumpingInterval;
@@ -29,17 +37,28 @@ public class BossController : MonoBehaviour
             Jump();
             jumpingIntervalAtual = jumpingInterval;
         }
+        if (bossHealth.vidaAtual <= bossHealth.maxHealth / 2)
+        {
+            segundoEstagio = true;
+            SegundoEstagio();           
+        }
         else
         {
             jumpingIntervalAtual -= Time.deltaTime;
         }
     }
+
+
+
+
     [ContextMenu("Pulo")]
     void Jump()
     {
+        if (!segundoEstagio)
+        {
         Vector2 jumpDirection = new Vector2(transform.right.x * jumpForceDirection.x, jumpForceDirection.y);
         rigiBody2D.AddForce(jumpDirection);
-
+        }
     }
 
     void Flip()
@@ -56,5 +75,26 @@ public class BossController : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.DrawRay(transform.position, transform.right * raycastDistance);
+    }
+    void AtiradorDeFogo()
+    {
+        if (podeAtirar)
+        {
+            anim.SetInteger("Transition", 1);
+            BolaDeFogo novaBola = Instantiate(bolaDeFogo, transform.position, Quaternion.identity).GetComponent<BolaDeFogo>();
+            novaBola.alvo = player;
+            podeAtirar = false;
+            Invoke("ResetPodeAtirar", tempoParaProximoTiro); 
+        }
+    }
+
+    void ResetPodeAtirar()
+    {
+        podeAtirar = true;
+    }
+
+    void SegundoEstagio()
+    {
+        AtiradorDeFogo();
     }
 }

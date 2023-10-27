@@ -222,7 +222,14 @@ public class Player : MonoBehaviour
         {
             Damage(2);
         }
+    }
 
+    private void OnTriggerEnter2D(Collider2D coll)
+    {
+        if (coll.gameObject.CompareTag("BolaDeFogo"))
+        {
+            Damage(2);
+        }
     }
 
 }

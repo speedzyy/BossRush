@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Flecha
   - Boss
+  - BolaDeFogo
   layers:
   - Default
   - TransparentFX
