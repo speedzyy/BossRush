@@ -60,7 +60,7 @@ public class BossHealth : MonoBehaviour
         if (other.gameObject.CompareTag("Flecha"))
         {
             //SE O NUMERO DO DANO TIVER DIFERENTE DE 8 FOI POR CAUSA DE TESTES
-            TakeDamage(8);
+            TakeDamage(50);
             //anim.SetBool()
         }
     }

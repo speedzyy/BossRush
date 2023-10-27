@@ -8,15 +8,11 @@ public class BolaDeFogo : MonoBehaviour
     public float tempoDeVida = 5.0f; 
     public Transform alvo;
 
+
     private void Awake()
     {
-        
+        Destroy(gameObject, tempoDeVida);
     }
-    private void Start()
-    {
-        Destroy(gameObject, tempoDeVida); 
-    }
-
     private void Update()
     {
         if (alvo != null)
@@ -25,6 +21,13 @@ public class BolaDeFogo : MonoBehaviour
 
 
             transform.Translate(direcao * velocidade * Time.deltaTime);
+        }
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            Destroy(gameObject);
         }
     }
 }

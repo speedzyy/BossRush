@@ -17,8 +17,12 @@ public class BossController : MonoBehaviour
     [SerializeField] Transform spawnDaBola;
     [SerializeField] BossHealth bossHealth;
     [SerializeField] Transform player;
+    [SerializeField] AudioSource source;
+    [SerializeField] AudioClip jump;
+    [SerializeField] AudioClip fire;
     bool segundoEstagio;
     public bool podeAtirar = true;
+
     private void Awake()
     {
         jumpingIntervalAtual = jumpingInterval;
@@ -56,8 +60,11 @@ public class BossController : MonoBehaviour
     {
         if (!segundoEstagio)
         {
-        Vector2 jumpDirection = new Vector2(transform.right.x * jumpForceDirection.x, jumpForceDirection.y);
-        rigiBody2D.AddForce(jumpDirection);
+            source.volume = 0.4f;
+            source.pitch = 1;
+            source.PlayOneShot(jump);
+            Vector2 jumpDirection = new Vector2(transform.right.x * jumpForceDirection.x, jumpForceDirection.y);
+            rigiBody2D.AddForce(jumpDirection);
         }
     }
 
@@ -80,6 +87,9 @@ public class BossController : MonoBehaviour
     {
         if (podeAtirar)
         {
+            source.volume = 0.6f;
+            source.pitch = 1;
+            source.PlayOneShot(fire);
             anim.SetInteger("Transition", 1);
             BolaDeFogo novaBola = Instantiate(bolaDeFogo, transform.position, Quaternion.identity).GetComponent<BolaDeFogo>();
             novaBola.alvo = player;
