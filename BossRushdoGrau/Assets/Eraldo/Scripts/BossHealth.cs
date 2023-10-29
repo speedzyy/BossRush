@@ -35,7 +35,7 @@ public class BossHealth : MonoBehaviour
     public void TakeDamage(int damage)
     {
         vidaAtual -= damage;
-
+        anim.SetTrigger("Hit");
 
         if (vidaAtual <= 0)
         {
@@ -60,7 +60,7 @@ public class BossHealth : MonoBehaviour
         if (other.gameObject.CompareTag("Flecha"))
         {
             //SE O NUMERO DO DANO TIVER DIFERENTE DE 8 FOI POR CAUSA DE TESTES
-            TakeDamage(50);
+            TakeDamage(8);
             //anim.SetBool()
         }
     }

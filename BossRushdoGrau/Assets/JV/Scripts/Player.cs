@@ -208,7 +208,7 @@ public class Player : MonoBehaviour
         if (health <= 0)
         {
             anim.SetInteger("transition", 5);
-            //SceneManager.LoadScene(0);
+            SceneManager.LoadScene(0);
         }
     }
 
