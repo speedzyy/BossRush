@@ -33,6 +33,7 @@ public class Player : MonoBehaviour
     public AudioClip clip3;
 
     private AudioSource source;
+    private SpriteRenderer sprite;
 
     // Start is called before the first frame update
     void Start()
@@ -40,6 +41,7 @@ public class Player : MonoBehaviour
         rig = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         TryGetComponent(out source);
+        TryGetComponent(out sprite);
 
         GameController.instance.UpdateLives(health);
 
@@ -204,12 +206,19 @@ public class Player : MonoBehaviour
     {
         health -= dmg;
         GameController.instance.UpdateLives(health);
+        sprite.color = Color.red;
+        Invoke(nameof(voltarbranco), 1f);
 
         if (health <= 0)
         {
             anim.SetInteger("transition", 5);
             SceneManager.LoadScene(0);
         }
+    }
+
+    void voltarbranco()
+    {
+        sprite.color = Color.white;
     }
 
     private void OnCollisionEnter2D(Collision2D coll)
