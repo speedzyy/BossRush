@@ -4,15 +4,30 @@ using UnityEngine;
 
 public class DemonBall : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public float speed = 5.0f; 
+    public float lifeTime = 5.0f; 
+    public Transform target;
 
-    // Update is called once per frame
-    void Update()
+
+    private void Awake()
     {
-        
+        Destroy(gameObject, lifeTime);
+    }
+    private void Update()
+    {
+        if (target != null)
+        {
+            Vector3 direcao = (target.position - transform.position).normalized;
+
+
+            transform.Translate(direcao * speed * Time.deltaTime);
+        }
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            Destroy(gameObject);
+        }
     }
 }

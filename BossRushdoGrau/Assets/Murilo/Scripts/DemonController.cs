@@ -6,29 +6,57 @@ using UnityEngine.SceneManagement;
 
 public class DemonController : MonoBehaviour
 {
-    public GameObject Player;
-    public GameObject tpA;
-    public GameObject tpB;
-    public GameObject tpC;
-    public GameObject tpD;
-    public GameObject tpE;
-    public GameObject pointA;
-    public GameObject pointB;
-    public float speed;
+    [SerializeField] GameObject Player;
+    [SerializeField] GameObject pointA;
+    [SerializeField] GameObject pointB;
+    [SerializeField] float speed;
+    [SerializeField] float tempoParaProximoTiro;
+    
+    [SerializeField] Rigidbody2D rb;
+    [SerializeField] Animator anim;
+    [SerializeField] Transform currentPoint;
+    [SerializeField] GameObject fireball;
+    [SerializeField] Transform fireballSpawn;
+    [SerializeField] BossHealth bossHealth;
+    [SerializeField] Transform player;
+    [SerializeField] AudioSource source;
+    [SerializeField] AudioClip fire;
+    private bool secondPhase;
+    private bool canShoot;
 
-    private Rigidbody2D rb;
-    private Animator anim;
-    private Transform currentPoint;
-
-    private void Start()
+    private void Awake()
     {
-        rb = GetComponent<Rigidbody2D>();
-        anim = GetComponent<Animator>();
-        currentPoint = pointB.transform;
+        fireShooter();
     }
 
+    void fireShooter()
+    {
+        if (canShoot)
+        {
+            source.volume = 0.6f;
+            source.pitch = 1;
+            source.PlayOneShot(fire);
+            anim.SetInteger("transition", 1);
+            DemonBall novaBola = Instantiate(fireball, transform.position, Quaternion.identity).GetComponent<DemonBall>();
+            novaBola.target = player;
+            canShoot = false;
+            Invoke("CanShootReset", tempoParaProximoTiro); 
+        }
+    }
+
+    void CanShootReset()
+    {
+        canShoot = true;
+    }
+    
     void Update()
     {
+
+        if (bossHealth.vidaAtual <= bossHealth.maxHealth / 2)
+        {
+            secondPhase = true;
+            SecondStage();
+        }
 
         Vector2 point = currentPoint.position - transform.position;
 
@@ -64,5 +92,10 @@ public class DemonController : MonoBehaviour
         }
 
         transform.localScale = scale;
+    }
+
+    void SecondStage()
+    {
+        
     }
 }
