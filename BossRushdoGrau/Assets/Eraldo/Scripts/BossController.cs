@@ -5,14 +5,15 @@ using UnityEngine.SceneManagement;
 
 public class BossController : MonoBehaviour
 {
-    [SerializeField] Rigidbody2D rigiBody2D;
+    [Header("Variáveis")]
     [SerializeField] Vector2 jumpForceDirection;
     [SerializeField, Min(0)] float raycastDistance;
-    [SerializeField] LayerMask raycastLayer;
     [SerializeField] float jumpingInterval;
-    [SerializeField] Animator anim;
     float jumpingIntervalAtual;
     public float tempoParaProximoTiro;
+    
+    [Header("Componentes")]
+    [SerializeField] Rigidbody2D rigiBody2D;
     [SerializeField] GameObject bolaDeFogo;
     [SerializeField] Transform spawnDaBola;
     [SerializeField] BossHealth bossHealth;
@@ -20,6 +21,10 @@ public class BossController : MonoBehaviour
     [SerializeField] AudioSource source;
     [SerializeField] AudioClip jump;
     [SerializeField] AudioClip fire;
+    [SerializeField] Animator anim;
+    [SerializeField] LayerMask raycastLayer;
+
+    [Header("Booleanos")]
     bool segundoEstagio;
     public bool podeAtirar = true;
 
