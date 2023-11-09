@@ -14,22 +14,28 @@ public class DemonController : MonoBehaviour
     
     [SerializeField] Rigidbody2D rb;
     [SerializeField] Animator anim;
-    [SerializeField] Transform currentPoint;
+    private Transform currentPoint;
     [SerializeField] GameObject fireball;
     [SerializeField] Transform fireballSpawn;
-    [SerializeField] BossHealth bossHealth;
+    [SerializeField] DemonHealth bossHealth;
     [SerializeField] Transform player;
     [SerializeField] AudioSource source;
     [SerializeField] AudioClip fire;
     private bool secondPhase;
-    private bool canShoot;
+    public bool canShoot;
 
     private void Awake()
     {
-        fireShooter();
+        
     }
 
-    void fireShooter()
+    private void Start()
+    {
+        FireShooter();
+        currentPoint = pointB.transform;
+    }
+
+    void FireShooter()
     {
         if (canShoot)
         {
@@ -39,6 +45,7 @@ public class DemonController : MonoBehaviour
             anim.SetInteger("transition", 1);
             DemonBall novaBola = Instantiate(fireball, transform.position, Quaternion.identity).GetComponent<DemonBall>();
             novaBola.target = player;
+            anim.SetInteger("transition", 0);
             canShoot = false;
             Invoke("CanShootReset", tempoParaProximoTiro); 
         }
@@ -52,7 +59,7 @@ public class DemonController : MonoBehaviour
     void Update()
     {
 
-        if (bossHealth.vidaAtual <= bossHealth.maxHealth / 2)
+        if (bossHealth.currentHp <= bossHealth.maxHp / 2)
         {
             secondPhase = true;
             SecondStage();
@@ -96,6 +103,7 @@ public class DemonController : MonoBehaviour
 
     void SecondStage()
     {
-        
+        speed = 10;
+        tempoParaProximoTiro = 1;
     }
 }

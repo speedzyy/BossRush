@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 8825947881256359000}
   m_Layer: 0
   m_Name: fireball
-  m_TagString: Untagged
+  m_TagString: BolaDeFogo
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -118,3 +118,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b2a1e369d1b326488ce7bd18589361f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speed: 5
+  lifeTime: 5
+  target: {fileID: 0}
